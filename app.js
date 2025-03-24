@@ -4,10 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//imports
+require("dotenv").config();
+const connectDb = require("./config/mongo");
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+//connect to mongoDb
+connectDb();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
