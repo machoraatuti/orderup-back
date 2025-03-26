@@ -1,8 +1,3 @@
-# orderup-back
-
-
-
-
 # Git Workflow Cheat Sheet
 
 ## 1. Branching Strategy
