@@ -8,14 +8,22 @@ const connectDb = async () => {
     //try..catch
     try {
 
-        //console process environment variable
-        console.log("MONGO_URI:", process.env.MONGO_URI);
+        //make sure .env variable is set up
+        if(!process.env.MONGO_URI_CLOUD) {
+            throw new Error("MONGO_URI_CLOUD is not defined in .env file");
+        }
 
-        //connect to mongoDb locally
-        await mongoose.connect(process.env.MONGO_URI);
+        //console the attempt to connect to Atlas
+        console.log("Connecting to MongoDD Atlas...");
 
-        //log successful connection
-        console.log("MongoDb connected successfully...");
+        //connect to MongoDB Atlas
+        await mongoose.connect(process.env.MONGO_URI_CLOUD, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+
+        //console successful connection
+        console.log("MongoDB Atlas connected successfully..");
 
     } catch(err) {
         //log unsuccessful connection

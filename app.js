@@ -7,13 +7,15 @@ var logger = require('morgan');
 //imports
 require("dotenv").config();
 const connectDb = require("./config/mongo");
+const cors = require("cors");
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 //custom routers
-const authRouter = require("./routes/auth");
+const authRouter = require("./routes/authRoutes");
+const profileRouter = require("./routes/profileRoutes");
 
 var app = express();
 
@@ -33,8 +35,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//cors
+app.use(cors({
+  origin: "*",//all origins
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 //add custom routers 
 app.use("/api/auth", authRouter);
+app.use("/api/profile", profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
