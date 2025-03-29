@@ -7,6 +7,7 @@ var logger = require('morgan');
 //imports
 require("dotenv").config();
 const connectDb = require("./config/mongo");
+const cors = require("cors");
 
 
 var indexRouter = require('./routes/index');
@@ -33,6 +34,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//cors
+app.use(cors({
+  origin: "*",//all origins
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 //add custom routers 
 app.use("/api/auth", authRouter);
