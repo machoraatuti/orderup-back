@@ -14,13 +14,10 @@ const connectDb = async () => {
         }
 
         //console the attempt to connect to Atlas
-        console.log("Connecting to MongoDD Atlas...");
+        console.log("Connecting to MongoDB Atlas...");
 
         //connect to MongoDB Atlas
-        await mongoose.connect(process.env.MONGO_URI_CLOUD, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        await mongoose.connect(process.env.MONGO_URI_CLOUD);
 
         //console successful connection
         console.log("MongoDB Atlas connected successfully..");

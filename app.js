@@ -16,6 +16,7 @@ var usersRouter = require('./routes/users');
 //custom routers
 const authRouter = require("./routes/authRoutes");
 const profileRouter = require("./routes/profileRoutes");
+const mpesaRouter = require("./routes/mpesaRoutes");
 
 var app = express();
 
@@ -32,9 +33,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
 //cors
 app.use(cors({
   origin: "*",//all origins
@@ -42,9 +40,15 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+
 //add custom routers 
 app.use("/api/auth", authRouter);
 app.use("/api/profile", profileRouter);
+app.use("/api/checkout", mpesaRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
