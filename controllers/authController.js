@@ -38,7 +38,8 @@ exports.signup = async(req, res) => {
         //return 201 created success message with jwt token
         res.status(201).json({ 
             message: "User registration successful!",
-            user: { id: user._id, name: user.name, email: user.email } 
+            user: { id: user._id, name: user.name, email: user.email },
+            token: tokenJwt 
         });
 
     } catch(err) {
